@@ -11,17 +11,24 @@ use App\Account;
  */
 class AccountRepository
 {
-    /**
-     * @return string
-     *  Return the model
-     */
+    public $timestamps = false;
+    const UPDATED_AT = null;
+
     public function getAllData()
     {
-        return Account::getAllData();
+        return Account::all();
     }
 
     public function deleteById($id)
     {
-        return Account::deleteById($id);
+        // $account = Account::find($id);
+        // $account->delete();
+        Account::where('Id',$id)->delete();
+    }
+    public function addNewData($username,$password){
+        $account = new Account;
+        $account->Username = $username;
+        $account->Password = $password;
+        $account->save();
     }
 }

@@ -10,12 +10,22 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+//check database
 Route::get('/checkdb', function () {
     // return view('welcome');
     dd(DB::connection()->getDatabaseName());
 
 });
+//return view
+Route::get('/home','AccountController@index');
 
-Route::get('/home','HomeController@index');
-Route::get('/delete/{id}','HomeController@deleteById');
+Route::get('/addnew', function() {
+    return view('addnew');
+});
+
+
+//controller crud
+Route::get('/delete/{id}','AccountController@deleteById');
+
+Route::get('/addNewAccount','AccountController@addNewData');
+
