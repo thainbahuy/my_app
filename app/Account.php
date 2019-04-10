@@ -8,7 +8,4 @@ class Account extends Model
 {
     protected $table = "ACCOUNT";
 
-    //  protected $fillable = [
-    //     'Id', 'Username','Password'
-    // ];
 }

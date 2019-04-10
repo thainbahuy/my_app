@@ -16,16 +16,18 @@ Route::get('/checkdb', function () {
     dd(DB::connection()->getDatabaseName());
 
 });
-//return view
-Route::get('/home','AccountController@index');
 
+//load view
+Route::get('/home','AccountController@index');
 Route::get('/addnew', function() {
     return view('addnew');
 });
 
-
-//controller crud
+//controller
 Route::get('/delete/{id}','AccountController@deleteById');
-
 Route::get('/addNewAccount','AccountController@addNewData');
+Route::get('update/{id}','AccountController@getDataById');
+Route::get('updateData','AccountController@update');
+
+
 

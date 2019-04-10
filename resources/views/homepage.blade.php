@@ -30,7 +30,7 @@
         <td>{{$item->Password}}</td>
         <td>
             <a href="{{url('delete/'.$item->Id)}}" class="btn btn-danger">Delete</a>
-            <a href="#"  class=" btn btn-primary">Edit</a>
+            <a href="{{url('update/'.$item->Id)}}"  class=" btn btn-primary">Update</a>
         </td>
       </tr>
     @endforeach
