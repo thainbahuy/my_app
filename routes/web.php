@@ -18,16 +18,20 @@ Route::get('/checkdb', function () {
 });
 
 //load view
-Route::get('/home','AccountController@index');
+
+Route::get('/', function() {
+    return view('welcome');
+});
+
 Route::get('/addnew', function() {
     return view('addnew');
 });
 
 //controller
-Route::get('/delete/{id}','AccountController@deleteById');
-Route::get('/addNewAccount','AccountController@addNewData');
-Route::get('update/{id}','AccountController@getDataById');
-Route::get('updateData','AccountController@update');
+Route::get('/home','ProductController@index');
+Route::get('/delete/{id}','ProductController@deleteById');
+Route::get('/addNewProduct', 'ProductController@addNewProduct');
+
 
 
 
