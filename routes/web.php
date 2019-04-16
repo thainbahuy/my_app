@@ -18,9 +18,14 @@ Route::get('/checkdb', function () {
 });
 
 //load view
-Route::get('/', function () {
+Route::get('/helloword', function () {
+    return view('helloword');
+});
+
+Route::get('/welcome', function () {
     return view('welcome');
 });
+
 Route::get('/home','AccountController@index');
 Route::get('/addnew', function() {
     return view('addnew');
