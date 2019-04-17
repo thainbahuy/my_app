@@ -8,7 +8,7 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Example Component</div>
+                    <div class="card-header">{{ message }}</div>
 
                     <div class="card-body">
                         Hello Chris Nguyen.
@@ -22,9 +22,15 @@
 
 <script>
     export default {
-
+        data(){
+            return{
+                message : 'bin du lieu'
+            }
+        }
     }
 </script>
 <style scoped>
-
+.card-header{
+    color: red;
+}
 </style>
