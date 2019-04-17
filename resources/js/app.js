@@ -24,6 +24,8 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
 //hello word vue
 Vue.component('my-component',require('./components/HellowordComponent.vue').default);
 
+Vue.component('condition-component',require('./components/ConditionalRendering').default);
+
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

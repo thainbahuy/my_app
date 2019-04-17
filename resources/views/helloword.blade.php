@@ -6,7 +6,8 @@
 </head>
 <body>
     <div id="app">
-       <my-component></my-component>
+{{--       <my-component></my-component>--}}
+        <condition-component></condition-component>
     </div>
     <script src='js/app.js'></script>
 </body>
