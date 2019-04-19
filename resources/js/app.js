@@ -20,6 +20,7 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
+// learn force update
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 //hello word vue
 Vue.component('my-component',require('./components/HellowordComponent.vue').default);
@@ -27,7 +28,8 @@ Vue.component('my-component',require('./components/HellowordComponent.vue').defa
 Vue.component('condition-component',require('./components/ConditionalRendering').default);
 // vong lap for Vue
 Vue.component('forcondition-component',require('./components/ListRendering').default);
-
+// chia component
+Vue.component('user-dashboard',require('./components/UserDashboard').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

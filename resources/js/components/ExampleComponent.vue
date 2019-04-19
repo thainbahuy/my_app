@@ -1,24 +1,47 @@
 <template>
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card">
-                    <div class="card-header">Example Component</div>
-
-                    <div class="card-body">
-                        I'm an example component.
-                    </div>
-                </div>
-            </div>
+    <div>
+        <div>
+            Name: {{ person.name }}
+        </div>
+        <div>
+            Nick name: {{ person.nickname }}
+        </div>
+        <div>
+            <button @click="changeName">Change Name</button>
+        </div>
+        <div>
+            <button @click="changeNickname">Change Nick Name</button>
+        </div>
+        <div>
+            <button @click="changeNicknameProperly">Change NIck name properly</button>
         </div>
     </div>
 </template>
-
-
 <script>
     export default {
-        mounted() {
-            console.log('Component mounted.')
+        data() {
+            return {
+                person: {
+                    name: 'Edson'
+
+                }
+            }
+        },
+        methods: {
+            changeName() {
+                this.person.name = 'Arantes';
+            },
+            // khong update data theo method nay vi nickname se khong phai la relative data
+            changeNickname() {
+                this.person.nickname = Math.random().toString(36).substring(7);
+                this.$forceUpdate()
+            },
+            changeNicknameProperly() {
+                Vue.set(this.person, 'nickname', 'Louis');
+            }
         }
     }
 </script>
+
+<style lang="scss" scoped>
+</style>
