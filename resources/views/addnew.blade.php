@@ -10,16 +10,21 @@
 </head>
 <body>
 <div>
-    <form method="GET" action="{{ url('addNewAccount') }}">
+    <form method="GET" action="{{ url('addNewProduct') }}">
         @csrf
         <div class="form-group">
-          <label for="exampleUsername">Username</label>
-          <input type="text" name="username" class="form-control" id="exampleUsername" aria-describedby="emailHelp" placeholder="Enter Username">
+          <label for="exampleUsername">Name</label>
+          <input type="text" name="name" class="form-control" id="exampleName" aria-describedby="emailHelp" placeholder="Enter Name product">
         </div>
         <div class="form-group">
-          <label for="exampleInputPassword1">Password</label>
-          <input type="text" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+          <label for="exampleInputTitle">Title</label>
+          <input type="text" name="title" class="form-control" id="exampleInputTitle" placeholder="Title">
         </div>
+        <div class="form-group">
+        <div class="form-group">
+            <label for="exampleInputPassword1">Price</label>
+            <input type="text" name="price" class="form-control" id="exampleInputPrice" placeholder="Price">
+          </div>
         <button type="submit" class="btn btn-primary">Add New</button>
       </form>
 </div>

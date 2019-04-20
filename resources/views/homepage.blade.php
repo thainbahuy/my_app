@@ -11,23 +11,25 @@
 <body>
 
 <div class="container">
-  <h2>Account Table</h2>
+  <h2>Product Table</h2>
   <p><a href="{{ url('addnew') }}" class="btn btn-success">Add New</a></p>
   <table class="table">
     <thead>
       <tr>
         <th>Id</th>
-        <th>Username</th>
-        <th>Password</th>
+        <th>Name</th>
+        <th>Title</th>
+        <th>Price</th>
         <th>control</th>
       </tr>
     </thead>
     <tbody>
-    @foreach ($listAccount as $item)
+    @foreach ($listProduct as $item)
       <tr>
         <td>{{$item->Id}}</td>
-        <td>{{$item->Username}}</td>
-        <td>{{$item->Password}}</td>
+        <td>{{$item->Name}}</td>
+        <td>{{$item->Title}}</td>
+        <td>{{$item->Price}}</td>
         <td>
             <a href="{{url('delete/'.$item->Id)}}" class="btn btn-danger">Delete</a>
             <a href="{{url('update/'.$item->Id)}}"  class=" btn btn-primary">Update</a>
