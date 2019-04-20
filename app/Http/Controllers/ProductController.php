@@ -12,7 +12,7 @@ class ProductController extends Controller
     public function __construct(ProductRepositoryInterface $productRepository) {
         $this->productRepository = $productRepository;
     }
-    public function index(){
+    /*public function index(){
         $data['listProduct'] = $this->productRepository->getAllData();
         return view ('homepage', $data);
     }
@@ -30,5 +30,23 @@ class ProductController extends Controller
         );
         $this->productRepository->addNewData($dataProduct);
         return redirect('/home');
+    }*/
+    public function store(Request $request)
+    {
+
+        $this->validate($request, [
+            'name' => 'required|min:5',
+            'title' => 'required|min:5',
+            'price' => 'required'
+        ]);
+        $dataProduct = array(
+            'Name' => $request->name,
+            'Title' => $request->title,
+            'Price' => $request->price
+        );
+        $this->productRepository->addNewData($dataProduct);
+        return response([
+            'result' => 'success'
+        ], 200);
     }
 }
