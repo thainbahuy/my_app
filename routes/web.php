@@ -43,3 +43,5 @@ Route::post('/products/store', 'ProductController@store');
 Route::get('/products/getListProduct', 'ProductController@getListProduct');
 
 Route::delete('products/{id}', 'ProductController@deleteById');
+
+Route::put('products/update/{id}','ProductController@updateData');

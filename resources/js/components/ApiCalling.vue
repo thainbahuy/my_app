@@ -25,9 +25,12 @@
                 <p>Price :</p>
                 <input type="text" v-model.number="product.price">
             </div>
-            <div class="button-create">
+            <div class="button-create" v-if="isUpdate == 1">
                 <button @click="createProduct">Add New</button>
+            </div>
+            <div class="button-update" v-if="isUpdate == 2">
                 <button @click="updateProduct">Save Update</button>
+                <button @click="backToCreate">Back</button>
             </div>
         </div>
             <div id="table product">
@@ -70,7 +73,8 @@
                 },
                 notifications :[],
                 errors: [],
-                listProducts: []
+                listProducts: [],
+                isUpdate : 1
             }
         },
         created (){
@@ -136,9 +140,27 @@
                 this.product.name = product.Name;
                 this.product.title = product.Title;
                 this.product.price = product.Price;
+                this.isUpdate = 2;
+            },
+            backToCreate(){
+                this.product.id = '';
+                this.product.name = '';
+                this.product.title ='';
+                this.product.price = 0;
+                this.isUpdate = 1;
             },
             updateProduct(){
-
+                axios.put('products/update/'+this.product.id,{
+                    name : this.product.name,
+                    title: this.product.title,
+                    price: this.product.price
+                })
+                    .then(response =>{
+                        console.log(response.data.result)
+                    })
+                    .catch(error =>{
+                        this.errors.push(error.response.data.errors)
+                    })
             }
         }
     }

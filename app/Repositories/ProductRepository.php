@@ -36,4 +36,12 @@ class ProductRepository implements ProductRepositoryInterface
 
     }
 
+    public function updateData($dataProduct)
+    {
+        Product::where('Id', '=', $dataProduct['Id'])->update([
+            'Name' => $dataProduct['Name'],
+            'Title' => $dataProduct['Titile'],
+            'Price' => $dataProduct['Price']
+        ]);
+    }
 }

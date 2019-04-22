@@ -1823,6 +1823,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -1834,7 +1837,8 @@ __webpack_require__.r(__webpack_exports__);
       },
       notifications: [],
       errors: [],
-      listProducts: []
+      listProducts: [],
+      isUpdate: 1
     };
   },
   created: function created() {
@@ -1907,8 +1911,28 @@ __webpack_require__.r(__webpack_exports__);
       this.product.name = product.Name;
       this.product.title = product.Title;
       this.product.price = product.Price;
+      this.isUpdate = 2;
     },
-    updateProduct: function updateProduct() {}
+    backToCreate: function backToCreate() {
+      this.product.id = '';
+      this.product.name = '';
+      this.product.title = '';
+      this.product.price = 0;
+      this.isUpdate = 1;
+    },
+    updateProduct: function updateProduct() {
+      var _this4 = this;
+
+      axios.put('products/update/' + this.product.id, {
+        name: this.product.name,
+        title: this.product.title,
+        price: this.product.price
+      }).then(function (response) {
+        console.log(response.data.result);
+      })["catch"](function (error) {
+        _this4.errors.push(error.response.data.errors);
+      });
+    }
   }
 });
 
@@ -37996,13 +38020,23 @@ var render = function() {
         })
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "button-create" }, [
-        _c("button", { on: { click: _vm.createProduct } }, [_vm._v("Add New")]),
-        _vm._v(" "),
-        _c("button", { on: { click: _vm.updateProduct } }, [
-          _vm._v("Save Update")
-        ])
-      ])
+      _vm.isUpdate == 1
+        ? _c("div", { staticClass: "button-create" }, [
+            _c("button", { on: { click: _vm.createProduct } }, [
+              _vm._v("Add New")
+            ])
+          ])
+        : _vm._e(),
+      _vm._v(" "),
+      _vm.isUpdate == 2
+        ? _c("div", { staticClass: "button-update" }, [
+            _c("button", { on: { click: _vm.updateProduct } }, [
+              _vm._v("Save Update")
+            ]),
+            _vm._v(" "),
+            _c("button", { on: { click: _vm.backToCreate } }, [_vm._v("Back")])
+          ])
+        : _vm._e()
     ]),
     _vm._v(" "),
     _c("div", { attrs: { id: "table product" } }, [

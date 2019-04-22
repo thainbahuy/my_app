@@ -66,4 +66,16 @@ class ProductController extends Controller
             ,200);
     }
 
+    public function updateData(Request $request){
+        $dataProduct = array(
+            'Id' => $request->id,
+            'Name' => $request->name,
+            'Title' => $request->title,
+            'Price' => $request->price
+        );
+        $this->productRepository->updateData($dataProduct);
+        return response(['result' => 'Update Product success']
+            ,200);
+    }
+
 }
