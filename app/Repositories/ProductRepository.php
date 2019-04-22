@@ -14,7 +14,7 @@ class ProductRepository implements ProductRepositoryInterface
     //overide
     public function getAllData()
     {
-        return Product::all();
+        return Product::select('Id','Name','Title','Price')->get();
     }
 
     //overide

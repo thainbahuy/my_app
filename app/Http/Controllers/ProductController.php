@@ -31,13 +31,16 @@ class ProductController extends Controller
         $this->productRepository->addNewData($dataProduct);
         return redirect('/home');
     }*/
+
+
+//API
     public function store(Request $request)
     {
 
         $this->validate($request, [
             'name' => 'required|min:5',
             'title' => 'required|min:5',
-            'price' => 'required'
+            'price' => 'required|numeric'
         ]);
         $dataProduct = array(
             'Name' => $request->name,
@@ -46,7 +49,21 @@ class ProductController extends Controller
         );
         $this->productRepository->addNewData($dataProduct);
         return response([
-            'result' => 'success'
+            'result' => 'Add New Product Success'
         ], 200);
     }
+
+    public function getListProduct ()
+    {
+        $listProduct = $this->productRepository->getAllData();
+        return response(['result' => $listProduct]
+            ,200);
+    }
+
+    public function deleteById(Request $request){
+        $this->productRepository->deleteById ($request->id);
+        return response(['result' => 'Delete Product success']
+            ,200);
+    }
+
 }

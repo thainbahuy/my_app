@@ -32,10 +32,14 @@ Route::get('/addNewProduct', 'ProductController@addNewProduct');
 
 //--------------------------------------------------------------
 
-//for Vuejs
+//load view for Vuejs
 Route::get('/products', function () {
     return view('HomeVueJs');
 });
 
 //call backend
 Route::post('/products/store', 'ProductController@store');
+
+Route::get('/products/getListProduct', 'ProductController@getListProduct');
+
+Route::delete('products/{id}', 'ProductController@deleteById');
