@@ -51,7 +51,7 @@
                         <td>{{item.Price}}</td>
                         <td>
                             <button @click="deleteProduct(item,index)" class="btn btn-danger">Delete</button>
-                            <button @click="updateProductSelected(item)" class=" btn btn-primary">Update</button>
+                            <button @click="updateProductSelected(index,item)" class=" btn btn-primary">Update</button>
                         </td>
                     </tr>
                     </tbody>
@@ -65,6 +65,7 @@
     export default {
         data() {
             return {
+                indexRecord : '',
                 product: {
                     id : '',
                     name: '',
@@ -98,6 +99,7 @@
                             Title: this.product.title,
                             Price: this.product.price
                         })
+                        this.backToCreate()
                     })
                     .catch(error => {
                         this.notifications = []
@@ -131,11 +133,15 @@
                         this.listProducts.splice(index, 1)
                         this.notifications.push(response.data.result)
 
+                        this.backToCreate()
+
                 }).catch(error =>{
                     this.errors.push(error.response.data.errors)
                 })
+
             },
-            updateProductSelected (product) {
+            updateProductSelected (index,product) {
+                this.indexRecord = index;
                 this.product.id = product.Id;
                 this.product.name = product.Name;
                 this.product.title = product.Title;
@@ -143,6 +149,7 @@
                 this.isUpdate = 2;
             },
             backToCreate(){
+                this.indexRecord = '';
                 this.product.id = '';
                 this.product.name = '';
                 this.product.title ='';
@@ -150,16 +157,31 @@
                 this.isUpdate = 1;
             },
             updateProduct(){
+                this.errors = []
+                this.notifications = []
                 axios.put('products/update/'+this.product.id,{
                     name : this.product.name,
                     title: this.product.title,
                     price: this.product.price
                 })
                     .then(response =>{
-                        console.log(response.data.result)
+                        this.notifications.push(response.data.result)
+                        this.listProducts[this.indexRecord].Name = this.product.name;
+                        this.listProducts[this.indexRecord].Title = this.product.title;
+                        this.listProducts[this.indexRecord].Price = this.product.price;
+
+                        this.backToCreate()
                     })
                     .catch(error =>{
-                        this.errors.push(error.response.data.errors)
+                        if (error.response.data.errors.name) {
+                            this.errors.push(error.response.data.errors.name)
+                        }
+                        if (error.response.data.errors.title) {
+                            this.errors.push(error.response.data.errors.title)
+                        }
+                        if (error.response.data.errors.price) {
+                            this.errors.push(error.response.data.errors.price)
+                        }
                     })
             }
         }

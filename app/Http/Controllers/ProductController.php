@@ -67,13 +67,18 @@ class ProductController extends Controller
     }
 
     public function updateData(Request $request){
+        $this->validate($request, [
+            'name' => 'required|min:5',
+            'title' => 'required|min:5',
+            'price' => 'required|numeric'
+        ]);
+
         $dataProduct = array(
-            'Id' => $request->id,
             'Name' => $request->name,
             'Title' => $request->title,
             'Price' => $request->price
         );
-        $this->productRepository->updateData($dataProduct);
+        $this->productRepository->updateData($request->id,$dataProduct);
         return response(['result' => 'Update Product success']
             ,200);
     }

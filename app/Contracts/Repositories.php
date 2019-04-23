@@ -20,6 +20,6 @@ interface ProductRepositoryInterface extends AbtractRepository
 
     public function addNewData($dataProduct);
     // public function getDataById();
-    public function updateData ($dataProduct);
+    public function updateData ($Id,$dataProduct);
 
 }

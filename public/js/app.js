@@ -1829,6 +1829,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      indexRecord: '',
       product: {
         id: '',
         name: '',
@@ -1865,6 +1866,8 @@ __webpack_require__.r(__webpack_exports__);
           Title: _this.product.title,
           Price: _this.product.price
         });
+
+        _this.backToCreate();
       })["catch"](function (error) {
         _this.notifications = [];
         _this.errors = [];
@@ -1902,11 +1905,14 @@ __webpack_require__.r(__webpack_exports__);
         _this3.listProducts.splice(index, 1);
 
         _this3.notifications.push(response.data.result);
+
+        _this3.backToCreate();
       })["catch"](function (error) {
         _this3.errors.push(error.response.data.errors);
       });
     },
-    updateProductSelected: function updateProductSelected(product) {
+    updateProductSelected: function updateProductSelected(index, product) {
+      this.indexRecord = index;
       this.product.id = product.Id;
       this.product.name = product.Name;
       this.product.title = product.Title;
@@ -1914,6 +1920,7 @@ __webpack_require__.r(__webpack_exports__);
       this.isUpdate = 2;
     },
     backToCreate: function backToCreate() {
+      this.indexRecord = '';
       this.product.id = '';
       this.product.name = '';
       this.product.title = '';
@@ -1923,14 +1930,32 @@ __webpack_require__.r(__webpack_exports__);
     updateProduct: function updateProduct() {
       var _this4 = this;
 
+      this.errors = [];
+      this.notifications = [];
       axios.put('products/update/' + this.product.id, {
         name: this.product.name,
         title: this.product.title,
         price: this.product.price
       }).then(function (response) {
-        console.log(response.data.result);
+        _this4.notifications.push(response.data.result);
+
+        _this4.listProducts[_this4.indexRecord].Name = _this4.product.name;
+        _this4.listProducts[_this4.indexRecord].Title = _this4.product.title;
+        _this4.listProducts[_this4.indexRecord].Price = _this4.product.price;
+
+        _this4.backToCreate();
       })["catch"](function (error) {
-        _this4.errors.push(error.response.data.errors);
+        if (error.response.data.errors.name) {
+          _this4.errors.push(error.response.data.errors.name);
+        }
+
+        if (error.response.data.errors.title) {
+          _this4.errors.push(error.response.data.errors.title);
+        }
+
+        if (error.response.data.errors.price) {
+          _this4.errors.push(error.response.data.errors.price);
+        }
       });
     }
   }
@@ -38076,7 +38101,7 @@ var render = function() {
                         staticClass: " btn btn-primary",
                         on: {
                           click: function($event) {
-                            return _vm.updateProductSelected(item)
+                            return _vm.updateProductSelected(index, item)
                           }
                         }
                       },
