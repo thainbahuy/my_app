@@ -45,7 +45,7 @@
                     </tr>
                     </thead>
                     <tbody v-if="Object.keys(listProducts).length != 0">
-                    <tr v-for="(item,index) in listProducts">
+                    <tr v-for="(item,index) in listProducts" :key="item.Id">
                         <td>{{item.Name}}</td>
                         <td>{{item.Title}}</td>
                         <td>{{item.Price}}</td>
@@ -159,7 +159,7 @@
             updateProduct(){
                 this.errors = []
                 this.notifications = []
-                axios.put('products/update/'+this.product.id,{
+                axios.put('/products/update/'+this.product.id,{
                     name : this.product.name,
                     title: this.product.title,
                     price: this.product.price

@@ -32,16 +32,19 @@ Route::get('/addNewProduct', 'ProductController@addNewProduct');
 
 //--------------------------------------------------------------
 
-//load view for Vuejs
-Route::get('/products', function () {
-    return view('HomeVueJs');
+
+//Laravel +vuejs
+Route::group(['prefix' => '/products'], function () {
+
+    Route::get('/', function () {
+        return view('HomeVueJs');
+    });
+
+    Route::post('/store', 'ProductController@store');
+
+    Route::get('/getListProduct', 'ProductController@getListProduct');
+
+    Route::delete('/{id}', 'ProductController@deleteById');
+
+    Route::put('/update/{id}','ProductController@updateData');
 });
-
-//call backend
-Route::post('/products/store', 'ProductController@store');
-
-Route::get('/products/getListProduct', 'ProductController@getListProduct');
-
-Route::delete('products/{id}', 'ProductController@deleteById');
-
-Route::put('products/update/{id}','ProductController@updateData');
