@@ -1,15 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 //check database
 Route::get('/checkdb', function () {
     // return view('welcome');
@@ -17,7 +7,7 @@ Route::get('/checkdb', function () {
 
 });
 
-//load view
+//load view welcome
 Route::get('/', function() {
     return view('welcome');
 });
@@ -32,14 +22,15 @@ Route::get('/addNewProduct', 'ProductController@addNewProduct');
 
 //--------------------------------------------------------------
 
-
 //Laravel +vuejs
 Route::group(['prefix' => '/products'], function () {
 
+    //controller load view
     Route::get('/', function () {
         return view('HomeVueJs');
-    });
+    })->name('homepage');
 
+    //controller execute
     Route::post('/store', 'ProductController@store');
 
     Route::get('/getListProduct', 'ProductController@getListProduct');
@@ -48,3 +39,13 @@ Route::group(['prefix' => '/products'], function () {
 
     Route::put('/update/{id}','ProductController@updateData');
 });
+
+//for login
+//controller load view
+Route::get('login', function() {
+    return view('auth/login');
+})->name('login');
+
+//controller execute
+Route::post('authenticate/login', 'AuthenticateController@index')->name('executelogin');
+
