@@ -21,8 +21,14 @@ class AuthenticateController extends Controller
             $request->session()->put('dataUser' , $dataUser);
             return redirect('/products');
         }else{
-            var_dump('ng');
-            var_dump($this->accountRepository->getDataAccount($request->username , $request->password));
+            $request->session()->flash('alert-warning', 'Incorrect Username and Password');
+            return redirect('login');
         }
+    }
+
+    public function logout(Request $request)
+    {
+        $request->session()->forget('dataUser');
+        return redirect('login');
     }
 }

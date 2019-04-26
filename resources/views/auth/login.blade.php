@@ -8,6 +8,9 @@
                 <div class="card-header">{{ __('Login') }}</div>
 
                 <div class="card-body">
+                    @if(Session::has('alert-warning'))
+                        <p ng-if="message" class="message ng-binding ng-scope">{{ Session::get('alert-warning') }}</p>
+                    @endif
                     <form method="POST" action="{{ route('executelogin') }}">
                         @csrf
                         <div class="form-group row">

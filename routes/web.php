@@ -26,9 +26,7 @@ Route::get('/addNewProduct', 'ProductController@addNewProduct');
 Route::group(['prefix' => '/products'], function () {
 
     //controller load view
-    Route::get('/', function () {
-        return view('HomeVueJs');
-    })->name('homepage');
+    Route::get('/','ProductController@index');
 
     //controller execute
     Route::post('/store', 'ProductController@store');
@@ -49,3 +47,4 @@ Route::get('login', function() {
 //controller execute
 Route::post('authenticate/login', 'AuthenticateController@index')->name('executelogin');
 
+Route::get('authenticate/logout', 'AuthenticateController@logout')->name('executelogout');

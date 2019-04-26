@@ -9,15 +9,16 @@ class ProductController extends Controller
 {
     protected $productRepository;
 
+
     public function __construct(ProductRepositoryInterface $productRepository) {
+        $this->middleware('auth');
         $this->productRepository = $productRepository;
     }
-    /*public function index(){
-        $data['listProduct'] = $this->productRepository->getAllData();
-        return view ('homepage', $data);
+    public function index(){
+        return view ('HomeVueJs');
     }
 
-    public function deleteById(Request $request){
+    /*public function deleteById(Request $request){
         $this->productRepository->deleteById ($request->id);
         return redirect('/home');
     }
@@ -31,7 +32,6 @@ class ProductController extends Controller
         $this->productRepository->addNewData($dataProduct);
         return redirect('/home');
     }*/
-
 
 //API
     public function store(Request $request)

@@ -18,6 +18,14 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <style>
+        p.message {
+            background-color: slategrey;
+            color: #ffffff;
+            padding: 5px;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
     <div id="app">
