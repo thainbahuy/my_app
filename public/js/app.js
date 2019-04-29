@@ -1849,14 +1849,12 @@ __webpack_require__.r(__webpack_exports__);
     createProduct: function createProduct() {
       var _this = this;
 
+      this.emptyNotiAndError();
       axios.post('/products/store', {
         name: this.product.name,
         title: this.product.title,
         price: this.product.price
       }).then(function (response) {
-        _this.errors = [];
-        _this.notifications = [];
-
         _this.notifications.push(response.data.result); //add new product into list view
 
 
@@ -1869,9 +1867,6 @@ __webpack_require__.r(__webpack_exports__);
 
         _this.backToCreate();
       })["catch"](function (error) {
-        _this.notifications = [];
-        _this.errors = [];
-
         if (error.response.data.errors.name) {
           _this.errors.push(error.response.data.errors.name);
         }
@@ -1932,7 +1927,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.errors = [];
       this.notifications = [];
-      axios.put('products/update/' + this.product.id, {
+      axios.put('/products/update/' + this.product.id, {
         name: this.product.name,
         title: this.product.title,
         price: this.product.price
@@ -1957,6 +1952,10 @@ __webpack_require__.r(__webpack_exports__);
           _this4.errors.push(error.response.data.errors.price);
         }
       });
+    },
+    emptyNotiAndError: function emptyNotiAndError() {
+      this.notifications = [];
+      this.errors = [];
     }
   }
 });
@@ -38074,7 +38073,7 @@ var render = function() {
           ? _c(
               "tbody",
               _vm._l(_vm.listProducts, function(item, index) {
-                return _c("tr", [
+                return _c("tr", { key: item.Id }, [
                   _c("td", [_vm._v(_vm._s(item.Name))]),
                   _vm._v(" "),
                   _c("td", [_vm._v(_vm._s(item.Title))]),

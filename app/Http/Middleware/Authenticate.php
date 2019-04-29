@@ -15,7 +15,7 @@ class Authenticate extends Middleware
     protected function redirectTo($request)
     {
         if ($request->session()->has('dataUser')) {
-            return route('login');
+            return redirect('/');
         }
     }
 }

@@ -6,7 +6,7 @@ interface AbtractRepository
     public function getAllData();
     public function deleteById($id);
 }
-interface AccountRepositoryInterface extends AbtractRepository
+interface AccountRepositoryInterface
 {
     public function getDataAccount($username , $password);
 }

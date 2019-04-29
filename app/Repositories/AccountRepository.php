@@ -10,19 +10,8 @@ use App\Account;
  */
 class AccountRepository implements AccountRepositoryInterface
 {
-
-    public function getAllData()
-    {
-        // TODO: Implement getAllData() method.
-    }
-
-    public function deleteById($id)
-    {
-        // TODO: Implement deleteById() method.
-    }
-
     public function getDataAccount($username, $password)
     {
-        return Account::where('Username','=',$username)->where('Password','=',$password)->get()->count();
+        return Account::where('Username','=',$username)->where('Password','=',$password)->get()->count(1);
     }
 }

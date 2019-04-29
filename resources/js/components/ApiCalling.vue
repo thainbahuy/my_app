@@ -83,27 +83,24 @@
         },
         methods: {
             createProduct() {
+                this.emptyNotiAndError();
                 axios.post('/products/store', {
                     name: this.product.name,
                     title: this.product.title,
                     price: this.product.price
                 })
                     .then(response => {
-                        this.errors = []
-                        this.notifications = []
-                        this.notifications.push(response.data.result)
+                        this.notifications.push(response.data.result);
                         //add new product into list view
                         this.listProducts.push({
                             Id : this.listProducts[this.listProducts.length-1].Id+1,
                             Name: this.product.name,
                             Title: this.product.title,
                             Price: this.product.price
-                        })
+                        });
                         this.backToCreate()
                     })
                     .catch(error => {
-                        this.notifications = []
-                        this.errors = []
                         if (error.response.data.errors.name) {
                             this.errors.push(error.response.data.errors.name)
                         }
@@ -116,8 +113,7 @@
                     })
             },
             getListProduct(){
-                this.errors = []
-                this.notifications = []
+                this.emptyNotiAndError();
                 axios.get('/products/getListProduct')
                     .then(response =>{
                         this.listProducts = response.data.result
@@ -126,12 +122,11 @@
                 })
             },
             deleteProduct(product,index){
-                this.errors = []
-                this.notifications = []
+                this.emptyNotiAndError();
                 axios.delete ('/products/'+ product.Id)
                     .then(response => {
-                        this.listProducts.splice(index, 1)
-                        this.notifications.push(response.data.result)
+                        this.listProducts.splice(index, 1);
+                        this.notifications.push(response.data.result);
 
                         this.backToCreate()
 
@@ -157,15 +152,14 @@
                 this.isUpdate = 1;
             },
             updateProduct(){
-                this.errors = []
-                this.notifications = []
+                this.emptyNotiAndError();
                 axios.put('/products/update/'+this.product.id,{
                     name : this.product.name,
                     title: this.product.title,
                     price: this.product.price
                 })
                     .then(response =>{
-                        this.notifications.push(response.data.result)
+                        this.notifications.push(response.data.result);
                         this.listProducts[this.indexRecord].Name = this.product.name;
                         this.listProducts[this.indexRecord].Title = this.product.title;
                         this.listProducts[this.indexRecord].Price = this.product.price;
@@ -183,6 +177,10 @@
                             this.errors.push(error.response.data.errors.price)
                         }
                     })
+            },
+            emptyNotiAndError(){
+                this.notifications = [];
+                this.errors = [];
             }
         }
     }
