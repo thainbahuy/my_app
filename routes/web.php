@@ -23,10 +23,7 @@ Route::get('/addNewProduct', 'ProductController@addNewProduct');
 //--------------------------------------------------------------
 
 //Laravel +vuejs
-Route::group(['prefix' => '/products'], function () {
-
-    //controller load view
-    Route::get('/','ProductController@index');
+Route::group(['middleware' => 'auth.app','prefix' => '/products'], function () {
 
     //controller execute
     Route::post('/store', 'ProductController@store');
@@ -37,8 +34,11 @@ Route::group(['prefix' => '/products'], function () {
 
     Route::put('/update/{id}','ProductController@updateData');
 });
+//controller load view
+Route::get('/home','ProductController@index');
 
-//for login
+
+////////////////////////////////////////for login
 //controller load view
 Route::get('login', function() {
     return view('auth/login');

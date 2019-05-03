@@ -19,7 +19,7 @@ class AuthenticateController extends Controller
         if(!empty($this->accountRepository->getDataAccount($request->username , $request->password))){
             $dataUser =  array('username' =>$request->username , 'password' => $request->password);
             $request->session()->put('dataUser' , $dataUser);
-            return redirect('/products');
+            return redirect('/home');
         }else{
             $request->session()->flash('alert-warning', 'Incorrect Username and Password');
             return redirect('login');
