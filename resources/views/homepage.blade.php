@@ -12,6 +12,13 @@
 
 <div class="container">
   <h2>Product Table</h2>
+  <div>
+    <form action="{{ url('importExcel') }}" class="form-horizontal" method="post" enctype="multipart/form-data">
+      @csrf
+      <input type="file" name="import_file" />
+        <button type="submit" class="btn btn-primary">Import File</button>
+    </form>
+  </div>
   <p><a href="{{ url('addnew') }}" class="btn btn-success">Add New</a></p>
   <table class="table">
     <thead>
@@ -32,7 +39,7 @@
         <td>{{$item->Price}}</td>
         <td>
             <a href="{{url('delete/'.$item->Id)}}" class="btn btn-danger">Delete</a>
-            <a href="{{url('update/'.$item->Id)}}"  class=" btn btn-primary">Update</a>
+            {{--  <a href="{{url('update/'.$item->Id)}}"  class=" btn btn-primary">Update</a>  --}}
         </td>
       </tr>
     @endforeach

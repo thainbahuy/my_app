@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,8 @@ Route::get('/home','ProductController@index');
 Route::get('/delete/{id}','ProductController@deleteById');
 Route::get('/addNewProduct', 'ProductController@addNewProduct');
 
+
+Route::post('importExcel','ProductController@importFileExcel');
 
 
 
