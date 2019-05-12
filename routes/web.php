@@ -30,4 +30,9 @@ Route::get('update/{id}','AccountController@getDataById');
 Route::get('updateData','AccountController@update');
 
 
+//test mail
+Route::get('testmail', 'MailController@sendMail');
 
+//Auth::routes();
+
+//Route::get('/home', 'HomeController@index')->name('home');
