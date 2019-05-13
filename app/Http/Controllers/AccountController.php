@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Account;
+use App\Jobs\TestJob;
 use Illuminate\Http\Request;
 use App\Repositories\AccountRepository;
 use App\Contracts\Repositories\AccountRepositoryInterface;
@@ -20,8 +21,14 @@ class AccountController extends Controller
      */
     public function index()
     {
-        $data['listAccount'] =  $this->accountRepository->getAllData();
-        return view('homepage',$data);
+//        $data['listAccount'] =  $this->accountRepository->getAllData();
+//        return view('homepage',$data);
+        for ($i = 0 ; $i < 3 ;$i++){
+//            dispatch(new TestJob);
+            TestJob::dispatch();
+        }
+        \Log::info('endddddddd');
+        dd('thuc hien job');
     }
     /**
      * Add new Data User into Database
