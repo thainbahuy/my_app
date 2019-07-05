@@ -1,13 +1,13 @@
 <template>
     <div class="api-calling">
         <div class="error" v-if="errors.length">
-           <span v-for="err in errors">
+           <span v-for="err in errors" :key="err.id">
                {{ err }}
            </span>
             <hr>
         </div>
         <div class="notification" v-if="notifications.length">
-           <span v-for="noti in notifications">
+           <span v-for="noti in notifications" :key="noti.id">
                {{ noti }}
            </span>
             <hr>

@@ -26,22 +26,6 @@ class ProductController extends Controller
 
     }
 
-    /*public function deleteById(Request $request){
-        $this->productRepository->deleteById ($request->id);
-        return redirect('/home');
-    }
-
-    public function addNewProduct(Request $request){
-        $dataProduct = array(
-            'Name' => $request->name,
-            'Title' => $request->title,
-            'Price' => $request->price
-        );
-        $this->productRepository->addNewData($dataProduct);
-        return redirect('/home');
-    }*/
-
-//API
     public function store(Request $request)
     {
 
