@@ -23,7 +23,7 @@ Route::get('/addNewProduct', 'ProductController@addNewProduct');
 //--------------------------------------------------------------
 
 //Laravel +vuejs
-Route::group(['middleware' => 'auth.app','prefix' => '/products'], function () {
+Route::group(['prefix' => '/products'], function () {
 
     //controller execute
     Route::post('/store', 'ProductController@store');

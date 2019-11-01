@@ -18,12 +18,7 @@ class ProductController extends Controller
     public function index(Request $request)
     {
 
-        if ($request->session()->has('dataUser')) {
-            return view('HomeVueJs');
-        } else {
-            return redirect('login');
-        }
-
+        return view('HomeVueJs');
     }
 
     public function store(Request $request)

@@ -11,7 +11,6 @@
 </head>
 <body>
 <div id="app">
-    <a href="{{route('executelogout')}}" style="float: right">Logout</a>
     <api-calling></api-calling>
     <script src ="/js/app.js"></script>
 </div>
