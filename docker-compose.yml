@@ -1,0 +1,36 @@
+version: '2'
+services:
+  application:
+    image: euclid1990/ubuntu-server
+    volumes:
+      - .:/var/www/html/blog
+  mariadb:
+    image: mariadb
+    ports:
+      - "3696:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: product_docker
+      MYSQL_USER: root
+      MYSQL_PASSWORD: abc123
+    volumes:
+      - ./mariadb:/var/lib/mysql
+  php:
+    image: binhle410/php7.2-fpm
+    ports:
+      - "9696:9000"
+    volumes_from:
+      - application
+    links:
+      - mariadb:mysql
+  nginx:
+    image: nginx
+    ports:
+      - "8696:80"
+    links:
+      - php
+    volumes_from:
+      - application
+    volumes:
+      - ./logs/nginx/:/var/log/nginx
+      - ./default.conf:/etc/nginx/conf.d/default.conf
