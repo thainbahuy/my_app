@@ -12,7 +12,7 @@
 <body>
 <div id="app">
     <api-calling></api-calling>
-    <script src ="/js/app.js"></script>
 </div>
+<script src ="/js/app.js"></script>
 </body>
 </html>

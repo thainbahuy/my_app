@@ -1,47 +1,49 @@
-version: '2'
+version: '3'
 services:
-  application:
-    image: euclid1990/ubuntu-server
-    volumes:
-      - .:/var/www/html/my_ap
-  mariadb:
-    image: mariadb
+  app:
+    image: toancong/phpup:2
+    depends_on:
+      - db
+      - queue
     ports:
-      - "3696:3306"
+      - 11400:80
+      - 443:443
+    volumes:
+      - .:/var/www/app
+      - ./storage/tools/app_queue.conf:/etc/supervisor/conf.d/app_queue.conf
+      # this mount will disable xdebug which enabled for dev in default
+      # - ./storage/tools/empty:/usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
+    working_dir: /var/www/app
+    environment:
+      PHP_MEM_LIMIT: -1
+
+  appdoc:
+    image: phpdoc/phpdoc
+    volumes:
+      - .:/data
+
+  db:
+    image: mysql:5.7
+    volumes:
+      - ./dbdata:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: product_docker
-      MYSQL_USER: root
-      MYSQL_PASSWORD: abc123
-    volumes:
-      - ./mariadb:/var/lib/mysql
-  php:
-    image: binhle410/php7.2-fpm
+      MYSQL_DATABASE: product_vue
+      MYSQL_USER: abc123
+      MYSQL_PASSWORD: root
     ports:
-      - "9696:9000"
-    volumes_from:
-      - application
-    links:
-      - mariadb:mysql
-  nginx:
-    image: nginx
-    ports:
-      - "8696:80"
-    links:
-      - php
-    volumes_from:
-      - application
-    volumes:
-      - ./logs/nginx/:/var/log/nginx
-      - ./default.conf:/etc/nginx/conf.d/default.conf
+      - 14307:3306
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     ports:
-      - "11409:80"
+      - 11409:80
     depends_on:
-      - mariadb
+      - db
     environment:
-      PMA_HOSTS: mariadb
+      PMA_HOSTS: db
       PMA_USER: root
       PMA_PASSWORD: root
 
+  queue:
+    image: schickling/beanstalkd

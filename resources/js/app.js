@@ -7,8 +7,12 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+import Vue from 'vue';
+import axios from 'axios';
+import VueAxios from 'vue-axios';
 
+Vue.use(require('vue-resource'));
+Vue.use(VueAxios,axios);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -22,8 +26,7 @@ window.Vue = require('vue');
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 //api calling
-Vue.component('api-calling',require('./components/ApiCalling.vue').default)
-Vue.component('editproduct-component',require('./components/EditProductComponent.vue').default)
+Vue.component('api-calling',require('./components/ApiCalling.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
