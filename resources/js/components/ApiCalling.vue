@@ -1,4 +1,8 @@
 <template>
+<div class="container">
+    <div class="router-button mb-2">
+        <router-link :to="{ name: 'list-team' }">List Team</router-link>
+    </div>
     <div class="api-calling">
         <div class="error" v-if="errors.length">
            <span v-for="err in errors" :key="err.id">
@@ -12,7 +16,7 @@
            </span>
             <hr>
         </div>
-        <div class="create-form">
+        <div class="create-form border border-secondary p-2">
             <div class="product-name-input">
                 <p>Name :</p>
                 <input type="text" v-model="product.name">
@@ -25,12 +29,8 @@
                 <p>Price :</p>
                 <input type="text" v-model.number="product.price">
             </div>
-            <div class="button-create" v-if="isUpdate == 1">
+            <div class="button-create">
                 <button @click="createProduct">Add New</button>
-            </div>
-            <div class="button-update" v-if="isUpdate == 2">
-                <button @click="updateProduct">Save Update</button>
-                <button @click="backToCreate">Back</button>
             </div>
         </div>
             <div id="table product">
@@ -51,13 +51,15 @@
                         <td>{{item.Price}}</td>
                         <td>
                             <button @click="deleteProduct(item,index)" class="btn btn-danger">Delete</button>
-                            <button @click="updateProductSelected(index,item)" class=" btn btn-primary">Update</button>
+                            <button class="btn btn-primary">Update</button>
                         </td>
                     </tr>
                     </tbody>
                 </table>
             </div>
     </div>
+</div>
+    
 
 </template>
 
@@ -75,7 +77,6 @@
                 notifications :[],
                 errors: [],
                 listProducts: [],
-                isUpdate : 1
             }
         },
         created (){
@@ -135,49 +136,41 @@
                 })
 
             },
-            updateProductSelected (index,product) {
-                this.indexRecord = index;
-                this.product.id = product.Id;
-                this.product.name = product.Name;
-                this.product.title = product.Title;
-                this.product.price = product.Price;
-                this.isUpdate = 2;
-            },
-            backToCreate(){
-                this.indexRecord = '';
-                this.product.id = '';
-                this.product.name = '';
-                this.product.title ='';
-                this.product.price = 0;
-                this.isUpdate = 1;
-            },
-            updateProduct(){
-                this.emptyNotiAndError();
-                axios.put('/products/update/'+this.product.id,{
-                    name : this.product.name,
-                    title: this.product.title,
-                    price: this.product.price
-                })
-                    .then(response =>{
-                        this.notifications.push(response.data.result);
-                        this.listProducts[this.indexRecord].Name = this.product.name;
-                        this.listProducts[this.indexRecord].Title = this.product.title;
-                        this.listProducts[this.indexRecord].Price = this.product.price;
+            // updateProductSelected (index,product) {
+            //     this.indexRecord = index;
+            //     this.product.id = product.Id;
+            //     this.product.name = product.Name;
+            //     this.product.title = product.Title;
+            //     this.product.price = product.Price;
+            //     this.isUpdate = 2;
+            // },
+            // updateProduct(){
+            //     this.emptyNotiAndError();
+            //     axios.put('/products/update/'+this.product.id,{
+            //         name : this.product.name,
+            //         title: this.product.title,
+            //         price: this.product.price
+            //     })
+            //         .then(response =>{
+            //             this.notifications.push(response.data.result);
+            //             this.listProducts[this.indexRecord].Name = this.product.name;
+            //             this.listProducts[this.indexRecord].Title = this.product.title;
+            //             this.listProducts[this.indexRecord].Price = this.product.price;
 
-                        this.backToCreate()
-                    })
-                    .catch(error =>{
-                        if (error.response.data.errors.name) {
-                            this.errors.push(error.response.data.errors.name)
-                        }
-                        if (error.response.data.errors.title) {
-                            this.errors.push(error.response.data.errors.title)
-                        }
-                        if (error.response.data.errors.price) {
-                            this.errors.push(error.response.data.errors.price)
-                        }
-                    })
-            },
+            //             this.backToCreate()
+            //         })
+            //         .catch(error =>{
+            //             if (error.response.data.errors.name) {
+            //                 this.errors.push(error.response.data.errors.name)
+            //             }
+            //             if (error.response.data.errors.title) {
+            //                 this.errors.push(error.response.data.errors.title)
+            //             }
+            //             if (error.response.data.errors.price) {
+            //                 this.errors.push(error.response.data.errors.price)
+            //             }
+            //         })
+            // },
             emptyNotiAndError(){
                 this.notifications = [];
                 this.errors = [];

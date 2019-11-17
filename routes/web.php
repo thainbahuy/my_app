@@ -1,11 +1,6 @@
 <?php
-//controller
-Route::get('/home','ProductController@index');
-Route::get('/delete/{id}','ProductController@deleteById');
-Route::get('/addNewProduct', 'ProductController@addNewProduct');
-
 //--------------------------------------------------------------
-
+Route::get('/','ProductController@index');
 //Laravel +vuejs
 Route::group(['prefix' => '/products'], function () {
 
@@ -18,6 +13,5 @@ Route::group(['prefix' => '/products'], function () {
 
     Route::put('/update/{id}','ProductController@updateData');
 });
-//controller load view
-Route::get('/home','ProductController@index');
+
 

@@ -5,14 +5,19 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
-require('./bootstrap');
+//require('./bootstrap');
 
 import Vue from 'vue';
 import axios from 'axios';
 import VueAxios from 'vue-axios';
+import bootstrap from './bootstrap';
+import VueRouter from 'vue-router'
+import { routes }  from './index';
 
 Vue.use(require('vue-resource'));
 Vue.use(VueAxios,axios);
+Vue.use(bootstrap);
+Vue.use(VueRouter);
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -26,13 +31,19 @@ Vue.use(VueAxios,axios);
 
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 //api calling
-Vue.component('api-calling',require('./components/ApiCalling.vue').default);
+Vue.component('api-component',require('./components/ApiCalling.vue').default);
+Vue.component('listteam-component',require('./components/ListTeamComponent.vue').default);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
+const router = new VueRouter({
+    mode: 'history',
+    routes
+});
 
 const app = new Vue({
-    el: '#app'
+    el: '#app',
+    router
 });
