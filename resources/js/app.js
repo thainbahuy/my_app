@@ -23,6 +23,7 @@ window.Vue = require('vue');
 Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 //api calling
 Vue.component('api-calling',require('./components/ApiCalling.vue').default)
+Vue.component('editproduct-component',require('./components/EditProductComponent.vue').default)
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application
