@@ -80,4 +80,9 @@ class ProductController extends Controller
 
     }
 
+    public function getProductById($id){
+        $product = $this->productRepository->getDataById($id);
+        return response(['result' => $product],200);
+    }
+
 }

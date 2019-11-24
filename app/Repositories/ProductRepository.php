@@ -40,4 +40,9 @@ class ProductRepository implements ProductRepositoryInterface
     {
         Product::where('Id','=',$Id)->update($dataProduct);
     }
+
+    public function getDataById($id)
+    {
+        return Product::where('Id','=',$id)->get();
+    }
 }

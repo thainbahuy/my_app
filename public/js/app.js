@@ -1841,8 +1841,9 @@ __webpack_require__.r(__webpack_exports__);
       var _this2 = this;
 
       this.emptyNotiAndError();
-      axios.get('/products/getListProduct').then(function (response) {
+      axios.get('products/getListProduct').then(function (response) {
         _this2.listProducts = response.data.result;
+        console.log(_this2.listProducts);
       })["catch"](function (error) {
         _this2.errors.push(error.response.data.errors);
       });
@@ -37985,7 +37986,7 @@ var render = function() {
       { staticClass: "router-button mb-2" },
       [
         _c("router-link", { attrs: { to: { name: "list-team" } } }, [
-          _vm._v("List Team")
+          _vm._v("List Teams")
         ])
       ],
       1

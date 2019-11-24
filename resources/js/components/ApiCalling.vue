@@ -1,7 +1,7 @@
 <template>
 <div class="container">
     <div class="router-button mb-2">
-        <router-link :to="{ name: 'list-team' }">List Team</router-link>
+        <router-link :to="{ name: 'list-team' }">List Teams</router-link>
     </div>
     <div class="api-calling">
         <div class="error" v-if="errors.length">
@@ -115,9 +115,10 @@
             },
             getListProduct(){
                 this.emptyNotiAndError();
-                axios.get('/products/getListProduct')
+                axios.get('products/getListProduct')
                     .then(response =>{
                         this.listProducts = response.data.result
+                        console.log(this.listProducts);
                     }).catch(error =>{
                         this.errors.push(error.response.data.errors)
                 })

@@ -16,3 +16,18 @@ use Illuminate\Http\Request;
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();
 // });
+
+//Laravel +vuejs
+Route::group(['prefix' => '/products'], function () {
+
+    //controller execute
+    Route::post('/store', 'ProductController@store');
+
+    Route::get('/getListProduct', 'ProductController@getListProduct');
+
+    Route::get('/edit/{id}', 'ProductController@getProductById');
+
+    Route::delete('/{id}', 'ProductController@deleteById');
+
+    Route::put('/update/{id}','ProductController@updateData');
+});
