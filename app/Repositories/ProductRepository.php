@@ -34,6 +34,8 @@ class ProductRepository implements ProductRepositoryInterface
 
         $product->save();
 
+        return $product->id;
+
     }
 
     public function updateData($Id,$dataProduct)
@@ -43,6 +45,8 @@ class ProductRepository implements ProductRepositoryInterface
 
     public function getDataById($id)
     {
-        return Product::where('Id','=',$id)->get();
+        return Product::where('Id','=',$id)
+            ->select('Id','Name','Title','Price')
+            ->first();
     }
 }

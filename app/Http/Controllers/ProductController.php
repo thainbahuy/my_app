@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Contracts\Repositories\ProductRepositoryInterface;
 
@@ -34,9 +35,10 @@ class ProductController extends Controller
             'Title' => $request->title,
             'Price' => $request->price
         );
-        $this->productRepository->addNewData($dataProduct);
+        $id = $this->productRepository->addNewData($dataProduct);
         return response([
-            'result' => 'Add New Product Success'
+            'result' => 'Add New Product Success',
+            'id' => $id,
         ], 200);
 
 
